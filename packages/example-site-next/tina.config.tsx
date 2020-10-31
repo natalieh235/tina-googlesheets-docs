@@ -13,6 +13,7 @@ const CONFIG: DocumentConfig = {
         { filePath: "MdxFiles" , label: 'MDX Files',  slug: '/mdx-files',},
         { filePath: "TinaConfig" , label: 'Tina Config',  slug: '/tina-config',},
         { filePath: "CmsObject" , label: 'CMS object',  slug: '/cms',},
+        { filePath: "PageOne" , label: 'Test',  slug: '/test',},
     ],
     tinaConfig: {
       enabled: false,
