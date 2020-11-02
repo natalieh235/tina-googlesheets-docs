@@ -11,7 +11,7 @@ const config = {
     );
     return config;
   },
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx']
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
 
 const withMDX = require('@next/mdx')({

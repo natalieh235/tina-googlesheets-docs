@@ -1,0 +1,49 @@
+# Create the CMS Instance
+<br />
+In App.js, import 'react-tinacms-googlesheets' and initialize a TinaCMS instance. Then, wrap all rendered components with the TinaProvider and TinacmsSheetsProvider.
+
+export const code = `
+import { TinaCMS, TinaProvider } from 'tinacms'
+import {GoogleSheetsClient, TinacmsSheetsProvider } from 'react-tinacms-googlesheets'
+\n
+function App() {
+  const cms = new TinaCMS({
+    enabled: true,
+    sidebar: true,
+    apis: {
+      sheets: new GoogleSheetsClient({
+        client_id: <CLIENT_ID>,
+        api_key: <SHEETS_API_KEY>,
+        redirect_uri: <REDIRECT_URI>,
+      }),
+    },
+  })
+  \n
+  return(
+    <TinaProvider cms={cms}>
+      <TinacmsSheetsProvider>
+        <EditLink cms={cms} />
+        <Home />
+      </TinacmsSheetsProvider>
+    </TinaProvider>
+  );
+}
+`
+
+import {GoogleSheetsClient, TinacmsSheetsProvider } from 'react-tinacms-googlesheets'
+export const TinaConfig = {
+    enabled: false,
+    toolbar: true,
+    sidebar: true,
+    apis: {
+      sheets: new GoogleSheetsClient({
+        client_id: process.env.CLIENT_ID,
+        api_key: process.env.API_KEY,
+        redirect_uri: process.env.REDIRECT_URI,
+      }),
+    }
+}
+
+
+
+

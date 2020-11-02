@@ -5,15 +5,11 @@ const CONFIG: DocumentConfig = {
     LinkWrapper: ({to, children})=>{
       return <Link href={`/[...slug]`} as={`${to}`}>{children}</Link>
     },
-    title: 'Tinacms Documentation Toolkit Docs',
+    title: 'Tinacms + Google Sheets Plugin',
     pages: [
         { filePath: "Intro" ,label: 'Intro',  slug: '/', },
-        { filePath: "GettingStarted" , label: 'Getting started',  slug: '/intro',},
-        { filePath: "Config" , label: 'Config',  slug: '/config',},
-        { filePath: "MdxFiles" , label: 'MDX Files',  slug: '/mdx-files',},
-        { filePath: "TinaConfig" , label: 'Tina Config',  slug: '/tina-config',},
-        { filePath: "CmsObject" , label: 'CMS object',  slug: '/cms',},
-        { filePath: "PageOne" , label: 'Test',  slug: '/test',},
+        { filePath: "CmsInstance" , label: 'Creating the CMS Instance',  slug: '/intro-cms',},
+        { filePath: "Form" , label: 'Using a Tina Form',  slug: '/form',},
     ],
     tinaConfig: {
       enabled: false,

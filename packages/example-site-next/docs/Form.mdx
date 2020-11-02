@@ -1,0 +1,88 @@
+export default function Home() {
+  const id = '1GbzQ3xXjg4rVWdBLqT0guyl-oQ87RS7qKWXfCpSz-xw'
+  const range = 'Sheet1'
+  const dimension = "ROWS"
+  const sheetOptions = {range: range, majorDimension: dimension}
+  const fields = [
+    {
+      name: "header",
+      label: "Header",
+      component: "text",
+    },
+    {
+      name: "subheader",
+      label: "Subheader",
+      component: "text",
+    },
+    {
+      name: "body",
+      label: "Body",
+      component: "textarea",
+    },
+  ]
+  const [editableData, form] = useGoogleSheetsForm(id, sheetOptions, fields, null)
+  usePlugin(form)
+  return (
+    <div className='home'>
+      <h1>Now, we can read data from a Google Spreadsheet: </h1>
+      <h1>{editableData.header}</h1>
+      <h2>{editableData.subheader}</h2>
+      <p>{editableData.body}</p>
+    </div>
+  );
+}
+
+export const code = `
+import { usePlugin } from 'tinacms';
+import { useGoogleSheetsForm } from 'react-tinacms-googlesheets'
+\n
+export default function Home() {
+  const id = '1GbzQ3xXjg4rVWdBLqT0guyl-oQ87RS7qKWXfCpSz-xw'
+  const range = 'Sheet1'
+  const dimension = "ROWS"
+  const sheetOptions = {range: range, majorDimension: dimension}
+  const fields = [
+    {
+      name: "header",
+      label: "Header",
+      component: "text",
+    },
+    {
+      name: "subheader",
+      label: "Subheader",
+      component: "text",
+    },
+    {
+      name: "body",
+      label: "Body",
+      component: "textarea",
+    },
+  ]
+  const [editableData, form] = useGoogleSheetsForm(id, sheetOptions, fields, null)
+  usePlugin(form)
+  \n
+  return (
+    <div className='home'>
+      <h1>Now, we can read data from a Google Spreadsheet: </h1>
+      <h1>{editableData.header}</h1>
+      <h2>{editableData.subheader}</h2>
+      <p>{editableData.body}</p>
+    </div>
+  );
+}
+`
+import { usePlugin } from 'tinacms'
+import {GoogleSheetsClient, TinacmsSheetsProvider, useGoogleSheetsForm } from 'react-tinacms-googlesheets'
+export const TinaConfig = {
+    enabled: true,
+    sidebar: true,
+    toolbar: true,
+    apis: {
+      sheets: new GoogleSheetsClient({
+        client_id: process.env.CLIENT_ID,
+        api_key: process.env.API_KEY,
+        redirect_uri: process.env.REDIRECT_URI,
+      }),
+    },
+}
+
