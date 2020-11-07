@@ -1,4 +1,4 @@
-export default function Home() {
+export const Home = () => {
   const id = '1GbzQ3xXjg4rVWdBLqT0guyl-oQ87RS7qKWXfCpSz-xw'
   const range = 'Sheet1'
   const dimension = "ROWS"
@@ -25,9 +25,15 @@ export default function Home() {
   return (
     <div className='home'>
       <h1>Now, we can read data from a Google Spreadsheet: </h1>
-      <h1>{editableData.header}</h1>
-      <h2>{editableData.subheader}</h2>
-      <p>{editableData.body}</p>
+      {editableData ? 
+        <div>
+          <h1>{editableData.header}</h1>
+          <h2>{editableData.subheader}</h2>
+          <p>{editableData.body}</p>
+        </div>
+        :
+        <h1>Can't fetch data...did you authenticate with Google?</h1>
+      }  
     </div>
   );
 }
@@ -63,10 +69,16 @@ export default function Home() {
   \n
   return (
     <div className='home'>
-      <h1>Now, we can read data from a Google Spreadsheet: </h1>
-      <h1>{editableData.header}</h1>
-      <h2>{editableData.subheader}</h2>
-      <p>{editableData.body}</p>
+      {editableData ? 
+        <div>
+          <h1>Now, we can read data from a Google Sheet.</h1>
+          <h1>{editableData.header}</h1>
+          <h2>{editableData.subheader}</h2>
+          <p>{editableData.body}</p>
+        </div>
+        :
+        <h1>Can't fetch data...did you authenticate with Google?</h1>
+      }
     </div>
   );
 }
@@ -79,10 +91,14 @@ export const TinaConfig = {
     toolbar: true,
     apis: {
       sheets: new GoogleSheetsClient({
-        client_id: process.env.CLIENT_ID,
-        api_key: process.env.API_KEY,
-        redirect_uri: process.env.REDIRECT_URI,
+        client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
+        api_key: process.env.NEXT_PUBLIC_API_KEY,
+        redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI,
       }),
     },
 }
+
+<TinacmsSheetsProvider>
+  <Home />
+</TinacmsSheetsProvider>
 

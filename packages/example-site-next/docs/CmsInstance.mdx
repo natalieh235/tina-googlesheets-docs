@@ -1,6 +1,41 @@
 # Create the CMS Instance
 <br />
-In App.js, import 'react-tinacms-googlesheets' and initialize a TinaCMS instance. Then, wrap all rendered components with the TinaProvider and TinacmsSheetsProvider.
+In App.js, import 'react-tinacms-googlesheets' and initialize a TinaCMS instance. Register the GoogleSheetsClient in the TinaCMS apis object.
+
+```js
+const cms = new TinaCMS({
+  enabled: true,
+  sidebar: true,
+  apis: {
+    sheets: new GoogleSheetsClient({
+      client_id: <CLIENT_ID>,
+      api_key: <SHEETS_API_KEY>,
+      redirect_uri: <REDIRECT_URI>,
+    }),
+  },
+})
+```
+<br />
+
+Then, wrap all rendered components with the TinaProvider and TinacmsSheetsProvider.
+
+<br />
+
+```js
+return(
+  <TinaProvider cms={cms}>
+    <TinacmsSheetsProvider>
+      <EditLink cms={cms} />
+      <Home />
+    </TinacmsSheetsProvider>
+  </TinaProvider>
+);
+```
+<br />
+
+Now, try clicking the [INSERT BUTTON TEXT] button to try authorizing with Google Sheets!
+
+<br />
 
 export const code = `
 import { TinaCMS, TinaProvider } from 'tinacms'
@@ -30,6 +65,7 @@ function App() {
 }
 `
 
+import { useCMS, TinaProvider } from 'tinacms'
 import {GoogleSheetsClient, TinacmsSheetsProvider } from 'react-tinacms-googlesheets'
 export const TinaConfig = {
     enabled: false,
@@ -37,12 +73,30 @@ export const TinaConfig = {
     sidebar: true,
     apis: {
       sheets: new GoogleSheetsClient({
-        client_id: process.env.CLIENT_ID,
-        api_key: process.env.API_KEY,
-        redirect_uri: process.env.REDIRECT_URI,
+        client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
+        api_key: process.env.NEXT_PUBLIC_API_KEY,
+        redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI,
       }),
     }
 }
+
+export const EditLink = () => {
+  const cms = useCMS()
+  return (
+    <button onClick={() => {
+      console.log('here')
+      cms.toggle()
+      }}>
+      {cms.enabled ? 'Exit Edit Mode' : 'Edit This Site'}
+    </button>
+  )
+}
+
+<TinacmsSheetsProvider>
+  <EditLink />
+</TinacmsSheetsProvider>
+
+
 
 
 
