@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "react-tinacms-googlesheets": {
+      "signature": "281e7c4f365c727769ecd3ca720a4e16",
+      "file": true
+    }
+  }
+}
